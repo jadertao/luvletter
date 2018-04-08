@@ -1,0 +1,43 @@
+:host {
+    display: flex;
+    flex-direction: row;
+    background-color: #ffffff;
+    padding: 18px;
+    margin-bottom: 5px;
+}
+
+.post-avator {
+    width: 48px;
+    height: 48px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.post-content {
+    flex: 1;
+    .post-content-head {
+        display: flex;
+        justify-content: space-between;
+        .username {
+            word-break: break-all;
+            color: #14171a;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .space {
+            width: 10px;
+        }
+        .posttime {
+            font-size: 14px;
+            color: #657786;
+        }
+    }
+    .post-content-body {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        font-size: 14px;
+        line-height: 20px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+}
