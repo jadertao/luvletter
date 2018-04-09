@@ -1,3 +1,11 @@
-<div class="editor" contenteditable="true">
-  
+<div class="editor-container">
+  <div class="editor-header">
+    send letter here
+  </div>
+  <div contenteditable="true" #editor [ngClass]="{'empty':content===DEFAULT&&!hasChanged&&!isEditing}" class="editor-body" (focus)="onEditorFocus(editor)"
+    (blur)="onEditorBlur(editor)" [innerText]="content" spellcheck="true">
+  </div>
+  <div class="editor-footer">
+    <button class="send-letter" (click)="onSend($event)">send</button>
+  </div>
 </div>
