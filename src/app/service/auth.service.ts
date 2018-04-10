@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestoreDocument } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/observable';
@@ -10,9 +10,8 @@ import { of } from 'rxjs/observable/of';
 export class AuthService {
 
   items: Observable<any[]>;
-  constructor(db: AngularFirestore, public afAuth: AngularFireAuth) {
-    // this.items = db.collection('users').valueChanges();
-    // this.items.subscribe(v => console.log(v));
+  constructor(public afAuth: AngularFireAuth) {
+
   }
 
   isLoggedIn = false;
@@ -20,20 +19,12 @@ export class AuthService {
   // store the URL so we can redirect after logging in
   redirectUrl: string;
 
-  // login(): Observable<boolean> {
-  //   return of(true).pipe(
-  //     delay(1000),
-  //     tap(val => this.isLoggedIn = true)
-  //   );
-  // }
-
   login(email: string, password: string): Promise<any> {
     console.log('login 111111');
     return this.afAuth
       .auth
       .signInWithEmailAndPassword(email, password)
-      .then(() => localStorage.setItem('user', email) )
-      .then(() => this.isLoggedIn = true);
+      .then(() => localStorage.setItem('user', email));
   }
 
   logout(): void {
