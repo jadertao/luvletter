@@ -1,4 +1,5 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { QueryService } from './../../service/query.service';
 
 @Component({
   selector: 'luv-editor',
@@ -8,11 +9,17 @@ import { Component, OnInit, SimpleChanges } from '@angular/core';
 export class EditorComponent implements OnInit {
 
   public DEFAULT = 'something to share?';
+
+  private avator = 'aqua';
   private _content = '';
+  private mood = '开心';
+
   private isEditing = false;
   private hasChanged = false;
 
-  constructor() { }
+  constructor(public qs: QueryService) {
+
+  }
 
   get content(): string {
     if (!this.hasChanged) {
@@ -26,26 +33,41 @@ export class EditorComponent implements OnInit {
     this._content = v;
   }
 
+  get greeting(): string {
+    return `${this.mood} 的 ${localStorage.getItem('user')}`;
+  }
   onSend(e) {
-    console.log(this.content);
+    this.qs
+      .getUserNickname()
+      .subscribe(v => console.log(v));
   }
 
-  onEditorFocus(element) {
+  onEditorFocus(e: HTMLDivElement) {
     this.isEditing = true;
-    if (!this.hasChanged && element.textContent === this.DEFAULT) {
-      element.textContent = '';
+    if (!this.hasChanged && e.textContent === this.DEFAULT) {
+      e.textContent = '';
     }
   }
 
-  onEditorBlur(element) {
+  onEditorBlur(e: HTMLDivElement) {
     this.isEditing = false;
-    if (element.textContent.length !== 0) {
+    if (e.textContent.length !== 0) {
       this.hasChanged = true;
     } else {
       this.hasChanged = false;
-      element.textContent = this.DEFAULT;
+      e.textContent = this.DEFAULT;
     }
-    this.content = element.textContent;
+    this.content = e.textContent;
+  }
+
+  parseInput(e: HTMLDivElement) {
+    const rawCMD = e.textContent;
+    if (e.textContent.startsWith('set')) {
+      const cmd = rawCMD.split(' ');
+      this[cmd[1]] = cmd[2];
+      e.textContent = '';
+      return true;
+    }
   }
 
   ngOnInit() {

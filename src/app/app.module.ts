@@ -13,6 +13,7 @@ import { AuthGuardService } from './service/auth-guard.service';
 import { AuthService } from './service/auth.service';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { QueryService } from './service/query.service';
 
 
 @NgModule({
@@ -30,7 +31,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
     AngularFirestoreModule,
     AngularFireAuthModule,
   ],
-  providers: [AuthGuardService, AuthService],
+  providers: [AuthGuardService, AuthService, QueryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,11 +1,11 @@
-<div class="editor-container">
-  <div class="editor-header">
-    send letter here
+<div class="user-avator" [style.background-color]="avator"></div>
+<div class="editor-container" >
+  <div class="editor-header" [innerText]="greeting">
   </div>
-  <div contenteditable="true" #editor [ngClass]="{'empty':content===DEFAULT&&!hasChanged&&!isEditing}" class="editor-body" (focus)="onEditorFocus(editor)"
-    (blur)="onEditorBlur(editor)" [innerText]="content" spellcheck="true">
+  <div #editor contenteditable="true" [ngClass]="{'empty':content===DEFAULT&&!hasChanged&&!isEditing}" class="editor-body" (focus)="onEditorFocus(editor)"
+    (blur)="onEditorBlur(editor)" (keyup.enter)="parseInput(editor)" [innerText]="content" spellcheck="true">
   </div>
   <div class="editor-footer">
-    <button class="send-letter" (click)="onSend($event)">send</button>
+    <luv-button [type]="'raised'" (click)="onSend($event)"></luv-button>
   </div>
 </div>
