@@ -10,7 +10,9 @@ export class StreamComponent implements OnInit {
 
   private posts: Array<any>;
   constructor(public qs: QueryService) {
-    this.posts = qs.getPostList();
+    qs
+      .getP()
+      .then((v) => this.posts = v);
   }
 
   ngOnInit() {

@@ -1,3 +1,6 @@
-<ng-container *ngFor="let post of posts">
-  <luv-postitem [post]="post"></luv-postitem>
+<h1 *ngIf="!posts">加载中...</h1>
+<ng-container *ngIf="posts">
+  <ng-container *ngFor="let post of posts">
+    <luv-postitem [post]="post"></luv-postitem>
+  </ng-container>
 </ng-container>

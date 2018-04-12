@@ -13,7 +13,7 @@ import { ButtonComponent } from './button/button.component';
     PostitemComponent,
     PostlistComponent,
     EditorComponent,
-    ButtonComponent
+    ButtonComponent,
 ],
   exports: [
     PostlistComponent,

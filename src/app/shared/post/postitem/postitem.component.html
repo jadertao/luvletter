@@ -1,15 +1,15 @@
-<div class="post-avator" [style.background-color]="post.avator"></div>
+<div class="post-avatar" [style.background-color]="post.avatar"></div>
 <div class="post-content">
   <div class="post-content-head">
     <span class="post-content-head">
-      <span class="username">{{post.username}}</span>
+      <span class="username">{{post.nickname}}</span>
       <span class="space"></span>
-      <span class="posttime">{{post.time}}</span>
+      <span class="posttime">{{post.timestamp | date:"yyyy-M-d HH:ss"}}</span>
     </span>
     <span class="option">...</span>
   </div>
   <div class="post-content-body">
-    {{post.body}}
+    {{post.content}}
   </div>
   <div class="post-content-footer">
     {{post.footer}}
