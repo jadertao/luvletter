@@ -10,19 +10,31 @@ export class EditorComponent implements OnInit {
 
   public DEFAULT = 'something to share?';
 
-  private avator = 'aqua';
+  private _avatar: string = this.getUserProperty('avatar');
+  private _nickname: string = this.getUserProperty('nickname');
   private _content = '';
   private mood = '开心';
+  private topic = '默认';
 
   private isEditing = false;
-  private hasChanged = false;
+  private hasContentChanged = false;
+  private hasUserInfoChanged = false;
 
   constructor(public qs: QueryService) {
 
   }
 
+  get nickname(): string {
+    return this._nickname;
+  }
+
+  set nickname(nickname) {
+    this.hasUserInfoChanged = true;
+    this._nickname = nickname;
+  }
+
   get content(): string {
-    if (!this.hasChanged) {
+    if (!this.hasContentChanged) {
       return this.DEFAULT;
     } else {
       return this._content;
@@ -33,39 +45,69 @@ export class EditorComponent implements OnInit {
     this._content = v;
   }
 
-  get greeting(): string {
-    return `${this.mood} 的 ${localStorage.getItem('user')}`;
+  set avatar(v: string) {
+    this._avatar = v;
   }
+
+  get avatar(): string {
+    return this._avatar;
+  }
+
+
+  getUserProperty(property: string): any {
+    const user = localStorage.getItem('user');
+    return JSON.parse(user)[property];
+  }
+
+  setUserProperty(property: string, value: string | number) {
+    this.hasUserInfoChanged = true;
+    const user = localStorage.getItem('user');
+    user[property] = value;
+    localStorage.setItem('item', JSON.stringify(user));
+  }
+
   onSend(e) {
-    this.qs
-      .getUserNickname()
-      .subscribe(v => console.log(v));
+    const letter = {
+      avatar: this._avatar,
+      content: this.content.trim(),
+      mood: this.mood,
+      nickname: this.nickname,
+      topic: this.topic,
+      user: this.getUserProperty('email'),
+      timestamp: new Date().getTime(),
+    };
+    console.log(letter);
+    this.qs.setS(letter);
+    // this.qs
+    //   .getUserNickname()
+    //   .subscribe(v => console.log(v));
   }
 
   onEditorFocus(e: HTMLDivElement) {
     this.isEditing = true;
-    if (!this.hasChanged && e.textContent === this.DEFAULT) {
-      e.textContent = '';
+    if (!this.hasContentChanged && e.innerText === this.DEFAULT) {
+      e.innerText = '';
     }
   }
 
   onEditorBlur(e: HTMLDivElement) {
     this.isEditing = false;
-    if (e.textContent.length !== 0) {
-      this.hasChanged = true;
+    if (e.innerText.length !== 0) {
+      this.hasContentChanged = true;
     } else {
-      this.hasChanged = false;
-      e.textContent = this.DEFAULT;
+      this.hasContentChanged = false;
+      e.innerText = this.DEFAULT;
     }
-    this.content = e.textContent;
+    this.content = e.innerText;
+    console.log(e.innerText);
   }
 
   parseInput(e: HTMLDivElement) {
-    const rawCMD = e.textContent;
-    if (e.textContent.startsWith('set')) {
+    const rawCMD = e.innerText;
+    if (e.innerText.startsWith('set')) {
       const cmd = rawCMD.split(' ');
       this[cmd[1]] = cmd[2];
-      e.textContent = '';
+      e.innerText = '';
       return true;
     }
   }

@@ -6,7 +6,7 @@
     margin-bottom: 5px;
 }
 
-.user-avator {
+.user-avatar {
     background-color: aqua;
     width: 48px;
     height: 48px;
@@ -23,6 +23,10 @@
     background-color: white;
     box-sizing: border-box;
 }
+.editor-header{
+    display: flex;
+    justify-content: space-between;
+}
 
 .editor-body {
     flex-basis: 150px;
@@ -32,7 +36,7 @@
     outline: none;
     border: 1px solid #a0b3d6;
     word-wrap: break-word;
-    overflow: scroll;
+    overflow: auto;
 }
 
 .empty {
