@@ -26,13 +26,14 @@ export class LoginComponent implements OnInit {
         if (this.email && this.password) {
           this.auth
             .login(this.email, this.password)
-            .then(() => {
-              this.router.navigate(['/']);
-            })
-            .catch((error) => {
-              this.reset();
-              e.value = `${error.code} ${error.message}`;
-            });
+            .subscribe(
+              () => {
+                setTimeout(() => this.router.navigate(['/']), 0);
+              },
+              (error) => {
+                this.reset();
+                e.value = `${error.code} ${error.message}`;
+              });
         } else {
           e.value = 'incompleted message';
           this.reset();
