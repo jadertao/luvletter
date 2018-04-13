@@ -5,5 +5,5 @@ export interface Luvletter {
   time: number;
   content: string;
   mood: string;
-  avator: string;
+  avatar: string;
 }
