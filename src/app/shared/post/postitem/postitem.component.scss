@@ -18,19 +18,17 @@
     .post-content-head {
         display: flex;
         justify-content: space-between;
+        color: #657786;
         .username {
             word-break: break-all;
             color: #14171a;
-            font-size: 14px;
             font-weight: bold;
         }
         .space {
             width: 10px;
         }
-        .posttime {
-            font-size: 14px;
-            color: #657786;
-        }
+        .mood {}
+        .posttime {}
     }
     .post-content-body {
         margin-top: 15px;

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Luvletter } from '../../../utils/interface';
 
 @Component({
   selector: 'luv-postitem',
@@ -6,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./postitem.component.scss']
 })
 export class PostitemComponent implements OnInit {
-  @Input() post: Object;
+  @Input() post: Luvletter;
   constructor() { }
 
   ngOnInit() {

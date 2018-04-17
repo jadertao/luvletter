@@ -4,10 +4,14 @@
     <span class="post-content-head">
       <span class="username">{{post.nickname}}</span>
       <span class="space"></span>
+      <span class="mood">{{post.mood}}</span>
+      <span class="space"></span>
       <span class="posttime">{{post.timestamp | date:"yyyy-M-d HH:ss"}}</span>
     </span>
     <span class="option">...</span>
   </div>
   <div class="post-content-body">{{post.content}}</div>
-  <div class="post-content-footer">{{post.footer}}</div>
+  <div class="post-content-footer">
+    <span *ngFor="let t of post.topic">#{{t}}#</span>
+  </div>
 </div>

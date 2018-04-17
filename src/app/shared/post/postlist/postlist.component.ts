@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Luvletter } from '../../../utils/interface';
 
 @Component({
   selector: 'luv-postlist',
@@ -6,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./postlist.component.scss']
 })
 export class PostlistComponent implements OnInit {
-  @Input() posts: Array<Object>;
+  @Input() posts: Array<Luvletter>;
   constructor() { }
 
   ngOnInit() {
