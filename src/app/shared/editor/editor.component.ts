@@ -1,5 +1,6 @@
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { QueryService } from './../../service/query.service';
+import { Luvletter } from '../../utils/interface';
 
 @Component({
   selector: 'luv-editor',
@@ -8,13 +9,16 @@ import { QueryService } from './../../service/query.service';
 })
 export class EditorComponent implements OnInit {
 
+
+  @Output() handleLetter = new EventEmitter<Luvletter>();
+
   public DEFAULT = 'something to share?';
 
   private _avatar: string = this.getUserProperty('avatar');
   private _nickname: string = this.getUserProperty('nickname');
   private _content = '';
   private mood = '开心';
-  private topic = '默认';
+  private _topic = ['默认'];
 
   private isEditing = false;
   private hasContentChanged = false;
@@ -22,6 +26,14 @@ export class EditorComponent implements OnInit {
 
   constructor(public qs: QueryService) {
 
+  }
+
+  get topic() {
+    return this._topic;
+  }
+
+  set topic(v) {
+    this._topic = v;
   }
 
   get nickname(): string {
@@ -67,17 +79,17 @@ export class EditorComponent implements OnInit {
   }
 
   onSend(e) {
-    const letter = {
+    const letter: Luvletter = {
       avatar: this._avatar,
-      content: this.content.trim(),
+      content: this.content,
       mood: this.mood,
       nickname: this.nickname,
       topic: this.topic,
       user: this.getUserProperty('email'),
       timestamp: new Date().getTime(),
     };
-    console.log(letter);
-    this.qs.setS(letter);
+    this.handleLetter.emit(letter);
+    // this.qs.setS(letter);
     // this.qs
     //   .getUserNickname()
     //   .subscribe(v => console.log(v));
