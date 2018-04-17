@@ -2,8 +2,9 @@ export interface Luvletter {
   id?: number;
   user: string;
   nickname: string;
-  time: number;
+  timestamp: number;
   content: string;
   mood: string;
   avatar: string;
+  topic: Array<string>;
 }
