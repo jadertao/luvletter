@@ -11,7 +11,7 @@ export class ScrollToTopComponent implements OnInit {
   scroll: ElementRef;
 
   public show = false;
-  public timer: NodeJS.Timer;
+  public timer: any;
 
   constructor(public el: ElementRef) {
 
