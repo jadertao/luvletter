@@ -1,11 +1,10 @@
+import { from as observableFrom, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
-import { Observable } from 'rxjs/Observable';
-import { tap, delay } from 'rxjs/operators';
-import 'rxjs/add/observable/fromPromise';
-import 'rxjs/add/operator/do';
+import { tap, switchMap } from 'rxjs/operators';
+
+
 
 @Injectable()
 export class AuthService {
@@ -22,11 +21,13 @@ export class AuthService {
 
   login(email: string, password: string): Observable<any> {
     console.log('login 111111');
-    return Observable.fromPromise(this.afAuth.auth.signInWithEmailAndPassword(email, password))
-      .switchMap(() => this.db
-        .collection('users', ref => ref.where('email', '==', email))
-        .valueChanges())
-      .do(v => localStorage.setItem('user', JSON.stringify(v[0])));
+    return observableFrom(this.afAuth.auth.signInWithEmailAndPassword(email, password))
+      .pipe(
+        switchMap(() => this.db
+          .collection('users', ref => ref.where('email', '==', email))
+          .valueChanges()),
+        tap(v => localStorage.setItem('user', JSON.stringify(v[0])))
+      );
   }
 
   logout(): void {

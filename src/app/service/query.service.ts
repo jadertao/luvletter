@@ -1,11 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { Observable } from 'rxjs/Observable';
-import { tap, delay } from 'rxjs/operators';
-import { of } from 'rxjs/observable/of';
-import { Luvletter } from '../utils/interface';
-import 'rxjs/add/observable/fromPromise';
-import 'rxjs/add/operator/do';
+
 @Injectable()
 export class QueryService {
 
