@@ -21,7 +21,7 @@ export class ScrollToTopComponent implements OnInit {
     this.timer = setInterval(() => {
       const osTop = document.documentElement.scrollTop || document.body.scrollTop;
       let speed = Math.floor(osTop / 6);
-      if (speed < 10) { speed = 10; }
+      if (speed < 100) { speed = 100; }
       document.documentElement.scrollTop = document.body.scrollTop = osTop - speed;
 
       if (document.documentElement.scrollTop < 20 && document.body.scrollTop < 20) {

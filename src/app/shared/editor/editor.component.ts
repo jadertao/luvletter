@@ -1,5 +1,5 @@
 import { Component, OnInit, SimpleChanges, Output, EventEmitter } from '@angular/core';
-import { QueryService } from './../../service/query.service';
+import { QueryService } from '../../service/query/query.service';
 import { Luvletter } from '../../utils/interface';
 
 @Component({

@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { StreamComponent } from './stream/stream.component';
-import { AuthGuardService } from './service/auth-guard.service';
+import { AuthGuardService } from './service/Auth/auth-guard.service';
 
 const routes: Routes = [
   {

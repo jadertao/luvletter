@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { QueryService } from '../service/query.service';
+import { QueryService } from '../service/query/query.service';
 import { LoadingBarService } from '../shared/loading-bar/loading-bar.service';
 import { Luvletter } from '../utils/interface';
 
