@@ -8,3 +8,8 @@ export interface Luvletter {
   avatar: string;
   topic: Array<string>;
 }
+
+export interface Account {
+  account: string | number;
+  password: string | number;
+}

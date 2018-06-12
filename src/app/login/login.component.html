@@ -1,2 +1,12 @@
-<luv-loading-bar></luv-loading-bar>
-<input #input type="text" (keyup.enter)="resolveInput(input)">
+<!-- <luv-loading-bar></luv-loading-bar> -->
+<form [formGroup]="loginForm">
+  <mat-form-field>
+    <input matInput placeholder="Account" formControlName="account">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Password" formControlName="password">
+  </mat-form-field>
+  <p>Form value: {{ loginForm.value | json }}</p>
+  <button mat-raised-button color="primary" (click)="login($event)">Login</button>
+</form>

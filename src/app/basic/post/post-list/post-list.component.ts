@@ -6,7 +6,7 @@ import { Luvletter } from '../../../utils/interface';
   templateUrl: './postlist.component.html',
   styleUrls: ['./postlist.component.scss']
 })
-export class PostlistComponent implements OnInit {
+export class PostListComponent implements OnInit {
   @Input() posts: Array<Luvletter>;
   constructor() { }
 

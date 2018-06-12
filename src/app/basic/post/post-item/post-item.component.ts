@@ -3,10 +3,10 @@ import { Luvletter } from '../../../utils/interface';
 
 @Component({
   selector: 'luv-postitem',
-  templateUrl: './postitem.component.html',
-  styleUrls: ['./postitem.component.scss']
+  templateUrl: './post-item.component.html',
+  styleUrls: ['./post-item.component.scss']
 })
-export class PostitemComponent implements OnInit {
+export class PostItemComponent implements OnInit {
   @Input() post: Luvletter;
   constructor() { }
 
