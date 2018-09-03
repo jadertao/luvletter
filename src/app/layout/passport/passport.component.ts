@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-passport',
+  selector: 'luv-passport',
   templateUrl: './passport.component.html',
   styleUrls: ['./passport.component.css']
 })

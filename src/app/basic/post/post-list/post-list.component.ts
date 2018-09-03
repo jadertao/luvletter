@@ -3,8 +3,8 @@ import { Luvletter } from '../../../utils/interface';
 
 @Component({
   selector: 'luv-postlist',
-  templateUrl: './postlist.component.html',
-  styleUrls: ['./postlist.component.scss']
+  templateUrl: './post-list.component.html',
+  styleUrls: ['./post-list.component.scss']
 })
 export class PostListComponent implements OnInit {
   @Input() posts: Array<Luvletter>;

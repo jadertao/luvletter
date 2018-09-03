@@ -11,6 +11,10 @@ import { BoardComponent } from './board/board.component';
   declarations: [,
     PassportComponent,
     BoardComponent
-]
+  ],
+  exports: [
+    PassportComponent,
+    BoardComponent
+  ]
 })
 export class LayoutModule { }
