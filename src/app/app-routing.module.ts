@@ -1,22 +1,28 @@
-import { BoardComponent } from './board/board.component';
 import { LoginComponent } from './login/login.component';
 import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { StreamComponent } from './stream/stream.component';
-import { AuthGuardService } from './service/auth/auth-guard.service';
+import { AuthGuardService } from './shared/service/auth/auth-guard.service';
+import { LetterBoardComponent } from './letter-board/letter-board.component';
 
 const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
     pathMatch: 'full'
-  }, {
-    path: '',
-    component: BoardComponent,
+  },
+  {
+    path: 'board',
+    component: LetterBoardComponent,
     canActivate: [AuthGuardService],
     pathMatch: 'full'
   },
+  {
+    path: '',
+    redirectTo: 'board',
+    pathMatch: 'full',
+  },
+
 ];
 
 @NgModule({

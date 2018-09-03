@@ -3,41 +3,29 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { AngularFireModule } from 'angularfire2';
-
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
-import { StreamComponent } from './stream/stream.component';
 import { LoginComponent } from './login/login.component';
-import { BoardComponent } from './board/board.component';
-import { AuthGuardService } from './service/auth/auth-guard.service';
-import { AuthService } from './service/auth/auth.service';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { QueryService } from './service/query/query.service';
-import { BasicModule } from './basic/basic.module';
+import { LetterBoardModule } from './letter-board/letter-board.module';
+import { HeadComponent } from './head/head.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StreamComponent,
     LoginComponent,
-    BoardComponent,
+    HeadComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
-    AngularFireAuthModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    BasicModule
+    LetterBoardModule,
   ],
-  providers: [AuthGuardService, AuthService, QueryService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
