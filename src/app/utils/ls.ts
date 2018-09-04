@@ -7,9 +7,9 @@
  * @returns
  */
 export function getItemFromLocalStorage(key: string): any {
-  const all = localStorage.getItem('luvletter');
-  if (all) {
-    return JSON.parse(all)[key];
+  const config = localStorage.getItem('luvletter');
+  if (config) {
+    return JSON.parse(config)[key];
   } else {
     return null;
   }
@@ -25,9 +25,9 @@ export function getItemFromLocalStorage(key: string): any {
  */
 export function saveItemToLocalStorage(key: string, value: any) {
   try {
-    const all = JSON.parse(localStorage.getItem('luvletter'));
-    all[key] = value;
-    localStorage.setItem('luvletter', JSON.stringify(all));
+    const config = JSON.parse(localStorage.getItem('luvletter'));
+    config[key] = value;
+    localStorage.setItem('luvletter', JSON.stringify(config));
   } catch (error) {
     throw error;
   }
@@ -59,8 +59,9 @@ export function saveBatchItemToLocalStorage(batch: object) {
  */
 export function removeItemFromLocalStorage(key: string) {
   try {
-    const all = JSON.parse(localStorage.getItem('luvletter'));
-    delete all[key];
+    const config = JSON.parse(localStorage.getItem('luvletter'));
+    delete config[key];
+    localStorage.setItem('luvletter', JSON.stringify(config));
   } catch (error) {
     throw error;
   }
@@ -68,7 +69,7 @@ export function removeItemFromLocalStorage(key: string) {
 
 export function removeBatchItemFromLocalStorage(batch: string[]) {
   try {
-    batch.forEach(v => removeItemFromLocalStorage[v]);
+    batch.forEach(v => removeItemFromLocalStorage(v));
   } catch (error) {
     throw error;
   }
