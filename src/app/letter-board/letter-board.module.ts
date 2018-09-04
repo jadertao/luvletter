@@ -4,11 +4,12 @@ import { LetterBoardComponent } from './letter-board.component';
 import { LetterCardComponent } from './letter-card/letter-card.component';
 import { LetterListComponent } from './letter-list/letter-list.component';
 import { MaterialModule } from '../shared/material/material.module';
-
+import { RouterModule } from '@angular/router';
 @NgModule({
   imports: [
     CommonModule,
     MaterialModule,
+    RouterModule,
   ],
   declarations: [
     LetterBoardComponent,

@@ -1,6 +1,6 @@
 import { from as observableFrom, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { saveBatchItemToLocalStorage } from '../../../utils/ls';
+import { saveBatchItemToLocalStorage, getItemFromLocalStorage, removeBatchItemFromLocalStorage } from '../../../utils/ls';
 
 
 @Injectable()
@@ -9,19 +9,23 @@ export class AuthService {
   items: Observable<any[]>;
   constructor(
   ) {
-
+    if (getItemFromLocalStorage('account')) {
+      this.isLogin = true;
+    }
   }
 
-  isLoggedIn = false;
+  isLogin = false;
 
-  // store the URL so we can redirect after logging in
-  redirectUrl: string;
-
-  login(email: string, password: string): any {
-    saveBatchItemToLocalStorage({ email, password });
+  login(account: string, password: string): any {
+    saveBatchItemToLocalStorage({ account, password });
+    this.isLogin = true;
+    console.log(this.isLogin);
   }
 
-  logout(): void {
-
+  logout() {
+    if (getItemFromLocalStorage('account')) {
+      removeBatchItemFromLocalStorage(['account', 'password']);
+      this.isLogin = false;
+    }
   }
 }

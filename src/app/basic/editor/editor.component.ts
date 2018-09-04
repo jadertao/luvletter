@@ -1,5 +1,4 @@
 import { Component, OnInit, SimpleChanges, Output, EventEmitter } from '@angular/core';
-import { QueryService } from '../../service/query/query.service';
 import { Luvletter } from '../../utils/interface';
 
 @Component({
@@ -23,10 +22,6 @@ export class EditorComponent implements OnInit {
   private isEditing = false;
   private hasContentChanged = false;
   private hasUserInfoChanged = false;
-
-  constructor(public qs: QueryService) {
-
-  }
 
   get topic() {
     return this._topic;

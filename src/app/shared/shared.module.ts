@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { MaterialModule } from './material/material.module';
 import { AuthGuardService } from './service/auth/auth-guard.service';
+import { AuthService } from './service/auth/auth.service';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { AuthGuardService } from './service/auth/auth-guard.service';
   ],
   providers: [
     AuthGuardService,
+    AuthService,
   ],
   exports: [
     MaterialModule,

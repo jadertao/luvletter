@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuardService } from './shared/service/auth/auth-guard.service';
 import { LetterBoardComponent } from './letter-board/letter-board.component';
+import { LetterListComponent } from './letter-board/letter-list/letter-list.component';
+import { PassportComponent } from './passport/passport.component';
 
 const routes: Routes = [
   {
@@ -15,6 +17,16 @@ const routes: Routes = [
     path: 'board',
     component: LetterBoardComponent,
     canActivate: [AuthGuardService],
+    pathMatch: 'full',
+    children: [{
+      path: '',
+      component: LetterListComponent,
+      pathMatch: 'full',
+    }]
+  },
+  {
+    path: 'passport',
+    component: PassportComponent,
     pathMatch: 'full'
   },
   {
@@ -22,7 +34,6 @@ const routes: Routes = [
     redirectTo: 'board',
     pathMatch: 'full',
   },
-
 ];
 
 @NgModule({

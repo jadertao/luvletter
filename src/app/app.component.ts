@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from './shared/service/auth/auth.service';
 
 @Component({
   selector: 'luv-root',
@@ -7,6 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'luv';
+
+  constructor(
+    public auth: AuthService
+  ) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('luvletter') === null) {

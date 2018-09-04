@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { saveBatchItemToLocalStorage } from '../utils/ls';
+import { AuthService } from '../shared/service/auth/auth.service';
 
 @Component({
   selector: 'luv-login',
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
+    public auth: AuthService,
   ) {
     this.createForm();
   }
@@ -28,7 +30,7 @@ export class LoginComponent implements OnInit {
 
   login(e) {
     const { account, password } = this.loginForm.value;
-    saveBatchItemToLocalStorage({ account, password });
+    this.auth.login(account, password);
     this.router.navigate(['/board']);
   }
   ngOnInit() {

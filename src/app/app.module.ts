@@ -9,13 +9,16 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { LoginComponent } from './login/login.component';
 import { LetterBoardModule } from './letter-board/letter-board.module';
+import { PassportComponent } from './passport/passport.component';
 import { HeadComponent } from './head/head.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HeadComponent,
+    PassportComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,9 +26,11 @@ import { HeadComponent } from './head/head.component';
     SharedModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    LetterBoardModule,
+    LetterBoardModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }
