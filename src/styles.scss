@@ -2,6 +2,7 @@
 
 @import "normalize.scss";
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "../node_modules/ng-zorro-antd/ng-zorro-antd.min.css";
 body {
     color: #14171a;
     font-size: 14px;
