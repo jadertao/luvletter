@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
       account: ['', Validators.required],
       password: ['', Validators.required],
     });
-    console.log(this.loginForm);
   }
 
   login(e) {
