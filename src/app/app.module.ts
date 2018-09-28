@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
@@ -11,7 +11,12 @@ import { LoginComponent } from './login/login.component';
 import { LetterBoardModule } from './letter-board/letter-board.module';
 import { PassportComponent } from './passport/passport.component';
 import { HeadComponent } from './head/head.component';
+import { HttpClientModule } from '@angular/common/http';
+import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
+import { registerLocaleData } from '@angular/common';
+import zh from '@angular/common/locales/zh';
 
+registerLocaleData(zh);
 
 @NgModule({
   declarations: [
@@ -26,9 +31,12 @@ import { HeadComponent } from './head/head.component';
     SharedModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    LetterBoardModule
+    LetterBoardModule,
+    FormsModule,
+    HttpClientModule,
+    NgZorroAntdModule,
   ],
-  providers: [],
+  providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [
     AppComponent
   ]
