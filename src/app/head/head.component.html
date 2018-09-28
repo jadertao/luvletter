@@ -1,8 +1,10 @@
 <mat-toolbar *ngIf="show" class="container-header">
   <div class="inside-header">
-    {{account}}
+    {{auth.user.account}}
   </div>
-  <button mat-raised-button routerLink="/board">面板</button>
-  <button mat-raised-button routerLink="/passport">个人设置</button>
-  <button mat-raised-button (click)="logout()">登出</button>
+  <span>
+    <button mat-raised-button routerLink="/board">面板</button>
+    <!-- <button mat-raised-button routerLink="/passport">个人设置</button> -->
+    <button mat-raised-button (click)="logout()">登出</button>
+  </span>
 </mat-toolbar>

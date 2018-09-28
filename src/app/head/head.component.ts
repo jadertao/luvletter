@@ -11,14 +11,10 @@ import { AuthService } from '../shared/service/auth/auth.service';
 export class HeadComponent implements OnInit, OnChanges {
 
   @Input() show: boolean;
-  public account: string;
   constructor(
     private router: Router,
     public auth: AuthService,
-  ) {
-    this.account = getItemFromLocalStorage('account');
-    console.log(localStorage.getItem('luvletter'));
-  }
+  ) { }
 
   logout() {
     this.auth.logout();
@@ -26,12 +22,11 @@ export class HeadComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    console.log(this.show);
+    console.log(this.auth.user);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     // Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
     // Add '${implements OnChanges}' to the class.
-    console.log(changes);
   }
 }
