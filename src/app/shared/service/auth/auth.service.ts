@@ -6,12 +6,16 @@ import { saveBatchItemToLocalStorage, getItemFromLocalStorage, removeBatchItemFr
 @Injectable()
 export class AuthService {
 
+  user = { account: null };
   items: Observable<any[]>;
   constructor(
   ) {
-    if (getItemFromLocalStorage('account')) {
+    const account = getItemFromLocalStorage('account');
+    if (account) {
       this.isLogin = true;
+      this.user.account = account;
     }
+    console.log(account);
   }
 
   isLogin = false;
@@ -19,7 +23,7 @@ export class AuthService {
   login(account: string, password: string): any {
     saveBatchItemToLocalStorage({ account, password });
     this.isLogin = true;
-    console.log(this.isLogin);
+    this.user = { account };
   }
 
   logout() {
