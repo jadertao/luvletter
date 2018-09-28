@@ -1,12 +1,11 @@
 export interface Luvletter {
   id?: number;
-  user: string;
+  account: string;
   nickname: string;
-  timestamp: number;
+  createTime: number;
   content: string;
   mood: string;
-  avatar: string;
-  topic: Array<string>;
+  tag: Array<string>;
 }
 
 export interface Account {

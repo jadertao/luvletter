@@ -74,16 +74,16 @@ export class EditorComponent implements OnInit {
   }
 
   onSend(e) {
-    const letter: Luvletter = {
-      avatar: this._avatar,
-      content: this.content,
-      mood: this.mood,
-      nickname: this.nickname,
-      topic: this.topic,
-      user: this.getUserProperty('email'),
-      timestamp: new Date().getTime(),
-    };
-    this.handleLetter.emit(letter);
+    // const letter: Luvletter = {
+    //   avatar: this._avatar,
+    //   content: this.content,
+    //   mood: this.mood,
+    //   nickname: this.nickname,
+    //   topic: this.topic,
+    //   user: this.getUserProperty('email'),
+    //   timestamp: new Date().getTime(),
+    // };
+    // this.handleLetter.emit(letter);
     // this.qs.setS(letter);
     // this.qs
     //   .getUserNickname()
