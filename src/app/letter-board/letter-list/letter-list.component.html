@@ -1,4 +1,2 @@
-<luv-letter-card></luv-letter-card>
-<luv-letter-card></luv-letter-card>
-<luv-letter-card></luv-letter-card>
-<luv-letter-card></luv-letter-card>
+<luv-letter-card *ngFor="let letter of letters" avator='../../../assets/avator.jpg' [nickname]='letter.nickname'
+  [content]='letter.content' [mood]='letter.mood' [topic]='letter.topic'></luv-letter-card>

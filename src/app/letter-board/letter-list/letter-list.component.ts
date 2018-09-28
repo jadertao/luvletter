@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LetterService } from '../../shared/service/letter.service';
+import { Luvletter } from '../../utils/interface';
 
 @Component({
   selector: 'luv-letter-list',
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LetterListComponent implements OnInit {
 
-  constructor() { }
+  public letters: Luvletter[];
+  constructor(
+    private letter: LetterService
+  ) {
+    this.letters = this.letter.getLetters();
+  }
 
   ngOnInit() {
   }

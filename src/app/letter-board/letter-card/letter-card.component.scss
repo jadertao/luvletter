@@ -1,9 +1,14 @@
-.example-card {
+@import '../../../config.scss';
+.letter-card {
   max-width: 600px;
   margin-bottom: 10px;
+  box-sizing: border-box;
+  @include respond-to(sm) {
+    width: 90vw;
+  }
 }
 
-.example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+.avator {
+  // background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
 }

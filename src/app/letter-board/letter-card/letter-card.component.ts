@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'luv-letter-card',
@@ -7,7 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LetterCardComponent implements OnInit {
 
-  constructor() { }
+  @Input() avator: string;
+  @Input() nickname: string;
+  @Input() content: string;
+  @Input() mood: string;
+  @Input() topic: string[];
+  constructor() {
+  }
 
   ngOnInit() {
   }
