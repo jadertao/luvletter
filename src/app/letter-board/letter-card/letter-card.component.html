@@ -1,15 +1,12 @@
-<mat-card class="letter-card">
-  <mat-card-header>
-    <div mat-card-avatar class="avator" [ngStyle]="{'background-image': 'url('+avator+')'}"></div>
-    <mat-card-title>{{nickname}}</mat-card-title>
-    <mat-card-subtitle>{{mood}}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <p>
-      {{content}}
-    </p>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button>评论</button>
-  </mat-card-actions>
-</mat-card>
+<nz-card class="letter-card">
+  <nz-card-meta nzTitle="Card title" [nzDescription]="nzDescription" [nzAvatar]="avatarTemplate"></nz-card-meta>
+  <p class="letter-cart-content">
+    {{content}}
+  </p>
+</nz-card>
+<ng-template #avatarTemplate>
+  <nz-avatar class="letter-cart-avator" [nzSrc]="avator"></nz-avatar>
+</ng-template>
+<ng-template #nzDescription>
+  {{mood}}
+</ng-template>

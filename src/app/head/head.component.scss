@@ -2,9 +2,12 @@
 // :host {}
 .container-header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   width: 1000px;
+  height: 60px;
   margin: 0 16px;
+  background-color: #edf9fc;
   box-sizing: border-box;
   @include respond-to(sm) {
     width: 100vw;
