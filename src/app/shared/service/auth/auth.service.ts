@@ -32,4 +32,9 @@ export class AuthService {
       this.isLogin = false;
     }
   }
+  checkLogin(): boolean {
+    if (getItemFromLocalStorage('account')) { return true; }
+
+    return false;
+  }
 }

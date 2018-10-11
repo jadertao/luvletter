@@ -25,7 +25,11 @@ export function getItemFromLocalStorage(key: string): any {
  */
 export function saveItemToLocalStorage(key: string, value: any) {
   try {
-    const config = JSON.parse(localStorage.getItem('luvletter'));
+    let oldConfig = localStorage.getItem('luvletter');
+    if (!oldConfig) {
+      oldConfig = '{}';
+    }
+    const config = JSON.parse(oldConfig);
     config[key] = value;
     localStorage.setItem('luvletter', JSON.stringify(config));
   } catch (error) {
