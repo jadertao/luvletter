@@ -5,7 +5,7 @@ export interface Luvletter {
   createTime: number;
   content: string;
   mood: string;
-  tag: Array<string>;
+  tags: Array<string>;
 }
 
 export interface Account {

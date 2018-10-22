@@ -16,10 +16,7 @@
       <!-- <nz-form-explain *ngIf="validateForm.get('password').dirty && validateForm.get('password').errors">Please input your Password!</nz-form-explain> -->
     </nz-form-control>
   </nz-form-item>
-  <!-- 
-  <mat-form-field>
-    <input matInput placeholder="Password" formControlName="password">
-  </mat-form-field> -->
+
   <p>Form value: {{ loginForm.value | json }}</p>
   <button nz-button nzType="primary" (click)="login($event)">Login</button>
 </form>
