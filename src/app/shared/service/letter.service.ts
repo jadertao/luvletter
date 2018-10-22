@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Luvletter } from '../../utils/interface';
 import { AuthService } from './auth/auth.service';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class LetterService {
     createTime: 1536114907125,
     content: this.content,
     mood: 'happy',
-    tag: ['默认'],
+    tags: ['默认'],
   }, {
     id: 2,
     account: 'foo',
@@ -25,7 +26,7 @@ export class LetterService {
     createTime: 1536114907125,
     content: this.content,
     mood: 'happy',
-    tag: ['默认'],
+    tags: ['默认'],
   }, {
     id: 3,
     account: 'foo',
@@ -33,7 +34,7 @@ export class LetterService {
     createTime: 1536114907125,
     content: this.content,
     mood: 'happy',
-    tag: ['默认'],
+    tags: ['默认'],
   }, {
     id: 4,
     account: 'foo',
@@ -41,14 +42,16 @@ export class LetterService {
     createTime: 1536114907125,
     content: this.content,
     mood: 'happy',
-    tag: ['默认'],
+    tags: ['默认'],
   }];
   modal: boolean;
-
+  state: Subject<string>;
   constructor(
     private auth: AuthService
   ) {
     this.modal = false;
+    this.state = new Subject();
+    this.state.next('done');
   }
 
   getLetters(): Luvletter[] {
@@ -60,6 +63,16 @@ export class LetterService {
     const nickname = this.letters[0].nickname;
     const account = this.auth.user.account;
     const letter = Object.assign({}, rawLetter, { timestamp, id, nickname, account });
+    console.log(letter);
     this.letters.unshift(letter);
+    this.toggleState('init');
+    this.click();
+  }
+  click() {
+    window.setTimeout(() => this.toggleState('done'), 300);
+  }
+  toggleState(s: string) {
+    console.log(s);
+    this.state.next(s);
   }
 }

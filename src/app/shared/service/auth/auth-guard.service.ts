@@ -18,15 +18,19 @@ export class AuthGuardService {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const url: string = state.url;
-
-    return this.checkLogin(url);
+    const isLogin = this.checkLogin();
+    if (url === '/login') {
+      if (isLogin) {
+        this.router.navigate(['/board']);
+        return false;
+      }
+      return true;
+    }
+    return isLogin;
   }
 
-  checkLogin(url: string): boolean {
+  checkLogin(): boolean {
     if (getItemFromLocalStorage('account')) { return true; }
-
-    // Navigate to the login page with extras
-    this.router.navigate(['/login']);
     return false;
   }
 }

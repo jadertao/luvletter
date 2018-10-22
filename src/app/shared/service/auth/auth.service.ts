@@ -15,7 +15,6 @@ export class AuthService {
       this.isLogin = true;
       this.user.account = account;
     }
-    console.log(account);
   }
 
   isLogin = false;
