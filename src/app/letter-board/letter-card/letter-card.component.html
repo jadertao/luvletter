@@ -1,8 +1,13 @@
 <nz-card class="letter-card">
-  <nz-card-meta nzTitle="Card title" [nzDescription]="nzDescription" [nzAvatar]="avatarTemplate"></nz-card-meta>
+  <nz-card-meta [nzTitle]="nickname" [nzDescription]="nzDescription" [nzAvatar]="avatarTemplate"></nz-card-meta>
   <p class="letter-cart-content">
     {{content}}
   </p>
+  <div>
+    <nz-tag *ngFor="let tag of tags">
+      {{ tag }}
+    </nz-tag>
+  </div>
 </nz-card>
 <ng-template #avatarTemplate>
   <nz-avatar class="letter-cart-avator" [nzSrc]="avator"></nz-avatar>
