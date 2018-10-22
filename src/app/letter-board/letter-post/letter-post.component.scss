@@ -3,6 +3,20 @@
 }
 
 .example-header-image {
-  // background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
+}
+
+.post-letter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  color: white;
+  position: fixed;
+  bottom: 10%;
+  right: 10%;
+}
+
+.tag {
+  user-select: none;
 }

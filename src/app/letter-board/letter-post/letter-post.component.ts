@@ -1,11 +1,6 @@
-import { Component, OnInit, Inject, NgZone, ViewChild } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { MatChipInputEvent } from '@angular/material';
-import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Luvletter } from '../../utils/interface';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { take } from 'rxjs/operators';
+
 import { LetterService } from '../../shared/service/letter.service';
 
 export interface Fruit {
@@ -19,65 +14,76 @@ export interface Fruit {
 export class LetterPostComponent implements OnInit {
 
   avator = '../../../assets/avator.jpg';
-  visible = true;
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  tags: string[] = [];
-  private letterForm: FormGroup;
 
-  @ViewChild('autosize') autosize: CdkTextareaAutosize;
   constructor(
-    public dialogRef: MatDialogRef<LetterPostComponent>,
-    private fb: FormBuilder,
-    private ngZone: NgZone,
     private letterService: LetterService,
-    // @Inject(MAT_DIALOG_DATA) public data: Luvletter,
   ) {
-    this.createForm();
   }
-  triggerResize() {
-    // Wait for changes to be applied, then trigger textarea resize.
-    this.ngZone.onStable.pipe(take(1))
-      .subscribe(() => this.autosize.resizeToFitContent(true));
-  }
-  add(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
 
-    // Add our fruit
-    if ((value || '').trim()) {
-      this.tags.push(value.trim());
+  isVisible = false;
+  isOkLoading = false;
+
+  moods = ['moodA', 'moodB', 'moodC', 'moodD', 'moodE'];
+  tags = ['tagA', 'tagB', 'tagC', 'tagD', 'tagE'];
+
+  selectedMood = null;
+  selectedTags = [];
+
+  @ViewChild('input')
+  _content: ElementRef;
+
+  get content() {
+    return this._content.nativeElement.value;
+  }
+
+  set content(value) {
+    this._content.nativeElement.value = value;
+  }
+
+  handleChangeMood(checked: boolean, mood: string): void {
+    console.log(checked, mood);
+    if (checked) {
+      this.selectedMood = mood;
+    } else {
+      this.selectedMood = null;
     }
+  }
 
-    // Reset the input value
-    if (input) {
-      input.value = '';
+  handleChangeTags(checked: boolean, tag: string): void {
+    if (checked) {
+      this.selectedTags.push(tag);
+    } else {
+      this.selectedTags = this.selectedTags.filter(t => t !== tag);
     }
   }
 
-  remove(mood: string): void {
-    const index = this.tags.indexOf(mood);
+  showModal(): void {
+    this.isVisible = true;
+  }
 
-    if (index >= 0) {
-      this.tags.splice(index, 1);
-    }
+  handleOk(): void {
+    this.isOkLoading = true;
+    window.setTimeout(() => {
+      this.isVisible = false;
+      this.isOkLoading = false;
+      this.post({ content: this.content, tag: this.selectedTags, mood: this.selectedMood });
+      this.trancate();
+    }, 2000);
   }
-  createForm() {
-    this.letterForm = this.fb.group({
-      mood: ['', Validators.required],
-      content: ['', Validators.required],
-    });
+
+  handleCancel(): void {
+    this.isVisible = false;
   }
-  post() {
-    const { mood, content } = this.letterForm.value;
-    const letter = { mood, content, tag: this.tags };
-    console.log(letter);
+
+  post(letter) {
+    // console.log(letter);
     this.letterService.post(letter);
   }
-  onNoClick(): void {
-    this.dialogRef.close();
+
+  trancate() {
+    this.selectedMood = null;
+    this.selectedTags = [];
+    this.content = '';
   }
 
   ngOnInit() {

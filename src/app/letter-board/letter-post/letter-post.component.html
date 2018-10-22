@@ -1,31 +1,22 @@
-<form [formGroup]="letterForm">
-  <mat-card class="example-card">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url('+avator+')'}"></div>
-      <mat-card-title>title</mat-card-title>
-      <mat-card-subtitle>
-        <mat-form-field>
-          <input matInput tabindex="-1" placeholder="心情" formControlName="mood">
-        </mat-form-field>
-      </mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-form-field class="example-full-width">
-        <textarea matInput placeholder="内容" formControlName="content" cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-          cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5"></textarea>
-      </mat-form-field>
-      <mat-form-field class="example-chip-list">
-        <mat-chip-list #chipList>
-          <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable" (removed)="remove(tag)">
-            {{tag}}
-            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-          </mat-chip>
-          <input placeholder="标签" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
-        </mat-chip-list>
-      </mat-form-field>
-    </mat-card-content>
-    <button mat-button (click)="post()">发布</button>
-  </mat-card>
-  <p>Form value: {{ letterForm.value | json }}</p>
-</form>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Modal Title" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()"
+  [nzOkLoading]="isOkLoading">
+  <div>
+    <nz-tag class="tag" *ngFor="let mood of moods" nzMode="checkable" [nzChecked]="selectedMood === mood"
+      (nzCheckedChange)="handleChangeMood($event, mood)">
+      {{ mood }}
+    </nz-tag>
+    <textarea #input nz-input placeholder="Autosize height with minimum and maximum number of lines" [nzAutosize]="{ minRows: 2, maxRows: 6 }"></textarea>
+    <nz-tag class="tag" *ngFor="let tag of tags" nzMode="checkable" [nzChecked]="selectedTags.indexOf(tag) > -1"
+      (nzCheckedChange)="handleChangeTags($event, tag)">
+      {{ tag }}
+    </nz-tag>
+    <div>
+      <span>{{selectedMood}}</span><br />
+      <span>{{selectedTags}}</span><br />
+      <span>{{content}}</span>
+    </div>
+  </div>
+</nz-modal>
+<button (click)="showModal()" class="post-letter" nz-button nzType="primary" nzSize="large" nzShape="circle">
+  <i class="anticon anticon-plus"></i>
+</button>
