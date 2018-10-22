@@ -13,7 +13,7 @@ export interface Fruit {
 })
 export class LetterPostComponent implements OnInit {
 
-  avator = '../../../assets/avator.jpg';
+  avatar = '../../../assets/avatar.jpg';
 
   constructor(
     private letterService: LetterService,

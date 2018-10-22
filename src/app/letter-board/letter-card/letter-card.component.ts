@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class LetterCardComponent implements OnInit {
 
-  @Input() avator: string;
+  @Input() avatar: string;
   @Input() nickname: string;
   @Input() content: string;
   @Input() mood: string;
