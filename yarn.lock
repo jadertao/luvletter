@@ -169,12 +169,6 @@
   version "6.0.3"
   resolved "http://registry.npm.taobao.org/@angular/language-service/download/@angular/language-service-6.0.3.tgz#7182f3824520fd5f5f6173fdee80284356d29d08"
 
-"@angular/material@^6.2.0":
-  version "6.2.0"
-  resolved "http://registry.npm.taobao.org/@angular/material/download/@angular/material-6.2.0.tgz#63cd30dc84cf9610c8fb4c16027836bfcf9fc520"
-  dependencies:
-    tslib "^1.7.1"
-
 "@angular/platform-browser-dynamic@^6.0.3":
   version "6.0.3"
   resolved "http://registry.npm.taobao.org/@angular/platform-browser-dynamic/download/@angular/platform-browser-dynamic-6.0.3.tgz#b27e26c06df4ce34879cefd818e7ff394764f834"
