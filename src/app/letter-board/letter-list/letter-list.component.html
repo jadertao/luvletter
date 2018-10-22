@@ -1,2 +1,18 @@
-<luv-letter-card *ngFor="let letter of letters" avator='../../../assets/avator.jpg' [nickname]='letter.nickname'
-  [content]='letter.content' [mood]='letter.mood' [topic]='letter.topic'></luv-letter-card>
+<!-- <ul>
+  <li *ngFor="let letter of letters;let i = index" [@newLetter]="i===0?state:null">
+    <luv-letter-card avator='../../../assets/avator.jpg' [nickname]='letter.nickname' [content]='letter.content' [mood]='letter.mood'
+      [tags]='letter.tags'>
+    </luv-letter-card>
+  </li>
+</ul> -->
+
+<nz-list [nzLoading]="'false'" [nzDataSource]="letters" [nzItemLayout]="'vertical'" [nzRenderItem]="item" [nzPagination]="pagination">
+  <ng-template #item let-item>
+    <luv-letter-card avator='../../../assets/avator.jpg' [nickname]='item.nickname' [content]='item.content' [mood]='item.mood'
+      [tags]='item.tags'>
+    </luv-letter-card>
+  </ng-template>
+  <ng-template #pagination>
+    <nz-pagination [nzPageIndex]="1" [nzTotal]="50"></nz-pagination>
+  </ng-template>
+</nz-list>
