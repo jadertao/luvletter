@@ -6,11 +6,14 @@
   </li>
 </ul> -->
 
-<nz-list [nzLoading]="'false'" [nzDataSource]="letters" [nzItemLayout]="'vertical'" [nzRenderItem]="item" [nzPagination]="pagination">
+<nz-list style="padding:20px 40px" [nzBordered]="'false'" [nzLoading]="'false'" [nzDataSource]="letters" [nzItemLayout]="'vertical'"
+  [nzRenderItem]="item" [nzPagination]="pagination">
   <ng-template #item let-item>
-    <luv-letter-card avatar='../../../assets/avatar.jpg' [nickname]='item.nickname' [content]='item.content' [mood]='item.mood'
-      [tags]='item.tags'>
-    </luv-letter-card>
+    <li [@newLetter]="letters.indexOf(item)===0?state:null">
+      <luv-letter-card avatar='../../../assets/avatar.jpg' [nickname]='item.nickname' [content]='item.content' [mood]='item.mood'
+        [tags]='item.tags'>
+      </luv-letter-card>
+    </li>
   </ng-template>
   <ng-template #pagination>
     <nz-pagination [nzPageIndex]="1" [nzTotal]="50"></nz-pagination>

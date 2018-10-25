@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {
   trigger,
   state,
@@ -8,6 +8,7 @@ import {
 } from '@angular/animations';
 import { LetterService } from '../../shared/service/letter.service';
 import { Luvletter } from '../../utils/interface';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'luv-letter-list',
@@ -27,18 +28,32 @@ import { Luvletter } from '../../utils/interface';
     ])
   ]
 })
-export class LetterListComponent implements OnInit {
+export class LetterListComponent implements OnInit, OnDestroy {
 
   public letters: Luvletter[];
   public state: string;
+  public subscriptionA: Subscription;
+  public subscriptionB: Subscription;
   constructor(
     private letter: LetterService,
   ) {
-    this.letters = this.letter.getLetters();
-    letter.state.subscribe(v => this.state = v);
+    this.subscriptionA = letter.getLetters().subscribe(v => {
+      console.log(v);
+      this.letters = v;
+    });
+    this.subscriptionB = letter.getState().subscribe(v => {
+      console.log(v);
+      this.state = v;
+    });
+    letter.broadCastLetters(letter.letters);
+    letter.broadCastState('done');
   }
 
   ngOnInit() {
   }
 
+  ngOnDestroy() {
+    this.subscriptionA.unsubscribe();
+    this.subscriptionB.unsubscribe();
+  }
 }
