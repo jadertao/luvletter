@@ -66,7 +66,7 @@ export class LetterPostComponent implements OnInit {
     window.setTimeout(() => {
       this.isVisible = false;
       this.isOkLoading = false;
-      this.post({ content: this.content, tag: this.selectedTags, mood: this.selectedMood });
+      this.post({ content: this.content, tags: this.selectedTags, mood: this.selectedMood });
       this.trancate();
     }, 2000);
   }
@@ -76,7 +76,7 @@ export class LetterPostComponent implements OnInit {
   }
 
   post(letter) {
-    // console.log(letter);
+    console.log(letter);
     this.letterService.post(letter);
   }
 
