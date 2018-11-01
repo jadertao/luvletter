@@ -3,9 +3,10 @@
 @import "normalize.scss";
 @import "../node_modules/ng-zorro-antd/ng-zorro-antd.min.css";
 body {
-    color: #14171a;
-    font-size: 14px;
-    line-height: 20px;
-    overflow-y: scroll; // background-color: #e6ecf0;
-    font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
+  color: #14171a;
+  background-color: #f6f6f6;
+  font-size: 14px;
+  line-height: 20px;
+  overflow-y: scroll; // background-color: #e6ecf0;
+  font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
 }

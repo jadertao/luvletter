@@ -15,30 +15,33 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
+import { FooterComponent } from './footer/footer.component';
 
 registerLocaleData(zh);
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    HeadComponent,
-    PassportComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    SharedModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    LetterBoardModule,
-    FormsModule,
-    HttpClientModule,
-    NgZorroAntdModule,
-  ],
-  providers: [{ provide: NZ_I18N, useValue: zh_CN }],
-  bootstrap: [
-    AppComponent
-  ]
+   declarations: [
+      AppComponent,
+      LoginComponent,
+      HeadComponent,
+      PassportComponent,
+      FooterComponent
+   ],
+   imports: [
+      BrowserModule,
+      AppRoutingModule,
+      SharedModule,
+      BrowserAnimationsModule,
+      ReactiveFormsModule,
+      LetterBoardModule,
+      FormsModule,
+      HttpClientModule,
+      NgZorroAntdModule
+   ],
+   providers: [
+   ],
+   bootstrap: [
+      AppComponent
+   ]
 })
 export class AppModule { }
