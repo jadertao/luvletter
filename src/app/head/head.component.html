@@ -1,25 +1,27 @@
-<header *ngIf="show" class="container-header">
-  <h2 class="inside-header">
-    LuvLetter
-  </h2>
-  <span>
-    <nz-dropdown nzPlacement="bottomRight">
-      <a nz-dropdown>
-        {{auth.user.account}}<i class="anticon anticon-down"></i>
-      </a>
-      <ul nz-menu>
-        <li nz-menu-item>
-          <a routerLink="/board">面板</a>
-        </li>
-        <li nz-menu-divider></li>
-        <li nz-menu-item>
-          <a routerLink="/passport">个人设置</a>
-        </li>
-        <li nz-menu-divider></li>
-        <li nz-menu-item>
-          <a (click)="logout()">登出</a>
-        </li>
-      </ul>
-    </nz-dropdown>
-  </span>
-</header>
+<div class="header-container">
+  <header *ngIf="show" class="container-header">
+    <h2 class="inside-header">
+      LuvLetter
+    </h2>
+    <span>
+      <nz-dropdown nzTrigger="click" nzPlacement="bottomRight">
+        <a nz-dropdown>
+          {{auth.user.account}}<i class="anticon anticon-down"></i>
+        </a>
+        <ul nz-menu>
+          <li nz-menu-item>
+            <a routerLink="/board">面板</a>
+          </li>
+          <li nz-menu-divider></li>
+          <li nz-menu-item>
+            <a routerLink="/passport">个人设置</a>
+          </li>
+          <li nz-menu-divider></li>
+          <li nz-menu-item>
+            <a (click)="logout()">登出</a>
+          </li>
+        </ul>
+      </nz-dropdown>
+    </span>
+  </header>
+</div>
