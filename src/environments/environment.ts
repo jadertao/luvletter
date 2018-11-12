@@ -5,12 +5,5 @@
 
 export const environment = {
   production: false,
-  firebase: {
-    apiKey: 'AIzaSyCTJxk94XqIAiPFdVLbJEXuYaFo7Eh-nl0',
-    authDomain: 'luvletter-35d2b.firebaseapp.com',
-    databaseURL: 'https://luvletter-35d2b.firebaseio.com',
-    projectId: 'luvletter-35d2b',
-    storageBucket: 'luvletter-35d2b.appspot.com',
-    messagingSenderId: '29317759764'
-  }
+  prefix: 'http://127.0.0.1:4200/'
 };
