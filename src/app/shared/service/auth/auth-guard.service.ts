@@ -6,11 +6,15 @@ import {
 } from '@angular/router';
 import { AuthService } from './auth.service';
 import { getItemFromLocalStorage } from '../../../utils/ls';
+import { checkLogin } from '../../../utils/checkLogin';
 
 
 
 @Injectable()
 export class AuthGuardService {
+
+
+  public checkLogin = checkLogin;
 
   constructor(
     private router: Router
@@ -18,19 +22,25 @@ export class AuthGuardService {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const url: string = state.url;
-    const isLogin = this.checkLogin();
-    if (url === '/login') {
-      if (isLogin) {
+    const isLogin = checkLogin();
+    console.log(isLogin, url);
+    if (isLogin) {
+      if (url === '/login') {
         this.router.navigate(['/board']);
         return false;
       }
       return true;
+    } else {
+      if (url !== '/login') {
+        this.router.navigate(['/login']);
+        return false;
+      }
+      if (url === '/login') {
+        return true;
+      }
+      return false;
     }
-    return isLogin;
   }
 
-  checkLogin(): boolean {
-    if (getItemFromLocalStorage('account')) { return true; }
-    return false;
-  }
+
 }

@@ -79,3 +79,6 @@ export function removeBatchItemFromLocalStorage(batch: string[]) {
   }
 }
 
+export function clearLocalStorage() {
+  localStorage.setItem('luvletter', JSON.stringify({}));
+}
