@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Luvletter } from '../../utils/interface';
 import { AuthService } from './auth/auth.service';
 import { Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { LENGTH_OF_PAGES, ALL_LETTERS } from '../../http/url';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,8 @@ export class LetterService {
   modal: boolean;
   state: Subject<string>;
   constructor(
-    private auth: AuthService
+    private auth: AuthService,
+    private http: HttpClient,
   ) {
     this.modal = false;
     this.state = new Subject<string>();
@@ -128,5 +131,10 @@ export class LetterService {
 
   toggleState(s: string) {
     this.broadCastState(s);
+  }
+
+  getPagesLength() {
+    this.http.get<any>(LENGTH_OF_PAGES).subscribe(v => console.log(v));
+    this.http.get<any>(ALL_LETTERS).subscribe(v => console.log(v));
   }
 }
