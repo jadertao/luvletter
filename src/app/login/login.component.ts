@@ -11,7 +11,7 @@ import { AuthService } from '../shared/service/auth/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  private loginForm: FormGroup;
+  public loginForm: FormGroup;
 
   constructor(
     private router: Router,
@@ -29,8 +29,12 @@ export class LoginComponent implements OnInit {
 
   login(e) {
     const { account, password } = this.loginForm.value;
-    this.auth.login(account, password);
-    this.router.navigate(['/board']);
+    this.auth.login(account, password)
+      .subscribe((result) => {
+        if (result) {
+          this.router.navigate(['/board']);
+        }
+      });
   }
   ngOnInit() {
   }

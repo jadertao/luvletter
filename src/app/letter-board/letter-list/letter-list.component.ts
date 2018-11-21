@@ -50,6 +50,8 @@ export class LetterListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    console.log('get');
+    this.letter.getPagesLength();
   }
 
   ngOnDestroy() {
