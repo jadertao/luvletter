@@ -46,9 +46,13 @@ export function saveItemToLocalStorage(key: string, value: any) {
  */
 export function saveBatchItemToLocalStorage(batch: object) {
   try {
-    Object.keys(batch).forEach((key: string) => {
-      saveItemToLocalStorage(key, batch[key]);
-    });
+    let oldConfig = localStorage.getItem('luvletter');
+    if (!oldConfig) {
+      oldConfig = '{}';
+    }
+    const config = JSON.parse(oldConfig);
+    Object.assign(config, batch);
+    localStorage.setItem('luvletter', JSON.stringify(config));
   } catch (error) {
     throw error;
   }

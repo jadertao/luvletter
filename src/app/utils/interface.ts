@@ -12,3 +12,8 @@ export interface Account {
   account: string | number;
   password: string | number;
 }
+
+export interface CustomError {
+  error: string;
+  message: string;
+}

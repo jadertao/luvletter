@@ -1,7 +1,8 @@
+import dlv from 'dlv';
 import { getItemFromLocalStorage } from './ls';
 
 export function checkLogin(): boolean {
-  if (getItemFromLocalStorage('token')) { return true; }
+  if (dlv(getItemFromLocalStorage('userInfo'), 'token')) { return true; }
 
   return false;
 }
