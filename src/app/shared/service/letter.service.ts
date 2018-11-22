@@ -4,6 +4,10 @@ import { AuthService } from './auth/auth.service';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { LENGTH_OF_PAGES, ALL_LETTERS } from '../../http/url';
+import { catchError } from 'rxjs/operators';
+import { handleError } from '../../utils/handleError';
+import { NzMessageService } from 'ng-zorro-antd';
+import { page2Offset } from '../../utils/pageOffset';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +24,7 @@ export class LetterService {
   constructor(
     private auth: AuthService,
     private http: HttpClient,
+    private messager: NzMessageService,
   ) {
     this.modal = false;
     this.state = new Subject<string>();
@@ -134,7 +139,14 @@ export class LetterService {
   }
 
   getPagesLength() {
-    this.http.get<any>(LENGTH_OF_PAGES).subscribe(v => console.log(v));
-    this.http.get<any>(ALL_LETTERS).subscribe(v => console.log(v));
+    return this.http.get<any>(LENGTH_OF_PAGES).pipe(
+      catchError(handleError(this.messager))
+    );
+    // this.http.get<any>(ALL_LETTERS).subscribe(v => console.log(v));
+  }
+  getOnePage(pageIndex: number, pageSize: number) {
+    return this.http.get<any>(ALL_LETTERS, { params: page2Offset(pageIndex, pageSize) }).pipe(
+      catchError(handleError(this.messager))
+    );
   }
 }

@@ -31,7 +31,7 @@ export class AuthService {
     const body = { account, password };
     const loginMsg = this.messager.info('登录中', { nzDuration: 10000 });
     return this.http.post<HttpResponse<any> | any>(LOGIN, body).pipe(
-      catchError(handleError(this.messager)),
+      catchError(handleError(this.messager, { closeOthers: true })),
       tap(v => {
         console.log(v);
         if (!v.error) {
