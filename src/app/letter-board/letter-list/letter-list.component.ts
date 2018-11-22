@@ -9,6 +9,7 @@ import {
 import { LetterService } from '../../shared/service/letter.service';
 import { Luvletter } from '../../utils/interface';
 import { Subscription } from 'rxjs';
+import { tap, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'luv-letter-list',
@@ -30,10 +31,14 @@ import { Subscription } from 'rxjs';
 })
 export class LetterListComponent implements OnInit, OnDestroy {
 
+  public position = 1;
+  public size = 10;
+  public max = 10;
   public letters: Luvletter[];
   public state: string;
   public subscriptionA: Subscription;
   public subscriptionB: Subscription;
+
   constructor(
     private letter: LetterService,
   ) {
@@ -51,7 +56,19 @@ export class LetterListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     console.log('get');
-    this.letter.getPagesLength();
+    this.letter
+      .getPagesLength().pipe(
+        tap(({ number, size }) => {
+          this.max = number;
+          this.size = size;
+          console.log(number, size);
+        }),
+        switchMap(({ size }) => this.letter.getOnePage(1, size))
+      )
+      .subscribe(v => {
+        // console.log(v);
+        this.letters = v;
+      });
   }
 
   ngOnDestroy() {
