@@ -12,6 +12,7 @@ export class LetterCardComponent implements OnInit {
   @Input() content: string;
   @Input() mood: string;
   @Input() tags: string[];
+  @Input() loading = false;
   constructor() {
   }
 

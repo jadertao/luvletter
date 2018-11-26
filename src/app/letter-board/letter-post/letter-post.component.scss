@@ -10,7 +10,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 30px;
+  font-size: 20px;
   color: white;
   position: fixed;
   bottom: 10%;
@@ -19,4 +19,16 @@
 
 .tag {
   user-select: none;
+}
+
+.content {
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.tag-prefix {
+  display: inline-block;
+  min-width: 55px;
 }

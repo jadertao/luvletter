@@ -1,11 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Luvletter } from '../../utils/interface';
+import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
+import { PartialLetter } from '../../utils/interface';
+import { BehaviorSubject } from 'rxjs';
 
-import { LetterService } from '../../shared/service/letter.service';
 
-export interface Fruit {
-  name: string;
-}
 @Component({
   selector: 'luv-letter-post',
   templateUrl: './letter-post.component.html',
@@ -13,18 +10,51 @@ export interface Fruit {
 })
 export class LetterPostComponent implements OnInit {
 
-  avatar = '../../../assets/avatar.jpg';
-
   constructor(
-    private letterService: LetterService,
   ) {
   }
 
-  isVisible = false;
-  isOkLoading = false;
+  @Input()
+  set isOkLoading(value: boolean) {
+    const visible = Boolean(value);
+    if (this.okLoadingSource.value !== visible) {
+      this.okLoadingSource.next(visible);
+      this.isOkLoadingChange.emit(visible);
+    }
+  }
+  get isOkLoading(): boolean {
+    return this.okLoadingSource.value;
+  }
 
-  moods = ['moodA', 'moodB', 'moodC', 'moodD', 'moodE'];
-  tags = ['tagA', 'tagB', 'tagC', 'tagD', 'tagE'];
+  @Input()
+  moods: string[];
+  @Input()
+  tags: string[];
+
+  @Input()
+  handleOk: (l: PartialLetter, cb?: () => void) => void;
+
+  @Input()
+  toggleVisible: () => void;
+
+
+  @Input()
+  set isVisible(value: boolean) {
+    const visible = Boolean(value);
+    if (this.visibleSource.value !== visible) {
+      this.visibleSource.next(visible);
+      this.isVisibleChange.emit(visible);
+    }
+  }
+  get isVisible(): boolean {
+    return this.visibleSource.value;
+  }
+
+  @Output() isVisibleChange: EventEmitter<boolean> = new EventEmitter();
+  @Output() isOkLoadingChange: EventEmitter<boolean> = new EventEmitter();
+
+  visibleSource = new BehaviorSubject<boolean>(false);
+  okLoadingSource = new BehaviorSubject<boolean>(false);
 
   selectedMood = null;
   selectedTags = [];
@@ -41,7 +71,6 @@ export class LetterPostComponent implements OnInit {
   }
 
   handleChangeMood(checked: boolean, mood: string): void {
-    console.log(checked, mood);
     if (checked) {
       this.selectedMood = mood;
     } else {
@@ -57,30 +86,20 @@ export class LetterPostComponent implements OnInit {
     }
   }
 
+  handleCancel = () => {
+    this.toggleVisible();
+  }
+
   showModal(): void {
     this.isVisible = true;
   }
 
-  handleOk(): void {
+  onOk = (): void => {
     this.isOkLoading = true;
-    window.setTimeout(() => {
-      this.isVisible = false;
-      this.isOkLoading = false;
-      this.post({ content: this.content, tags: this.selectedTags, mood: this.selectedMood });
-      this.trancate();
-    }, 2000);
+    this.handleOk({ content: this.content, tags: this.selectedTags, mood: this.selectedMood }, this.trancate);
   }
 
-  handleCancel(): void {
-    this.isVisible = false;
-  }
-
-  post(letter) {
-    console.log(letter);
-    this.letterService.post(letter);
-  }
-
-  trancate() {
+  trancate = () => {
     this.selectedMood = null;
     this.selectedTags = [];
     this.content = '';

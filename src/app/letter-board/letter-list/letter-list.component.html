@@ -1,21 +1,14 @@
-<!-- <ul>
-  <li *ngFor="let letter of letters;let i = index" [@newLetter]="i===0?state:null">
-    <luv-letter-card avatar='../../../assets/avatar.jpg' [nickname]='letter.nickname' [content]='letter.content' [mood]='letter.mood'
-      [tags]='letter.tags'>
-    </luv-letter-card>
-  </li>
-</ul> -->
-
-<nz-list [nzBordered]="'false'" [nzLoading]="'false'" [nzDataSource]="letters" [nzItemLayout]="'vertical'"
+<nz-list [nzBordered]="'false'" [nzLoading]="'false'" [nzDataSource]="loading?defaultLetter:letters" [nzItemLayout]="'vertical'"
   [nzRenderItem]="item" [nzPagination]="pagination">
   <ng-template #item let-item>
-    <li [@newLetter]="letters.indexOf(item)===0?state:null">
-      <luv-letter-card avatar='../../../assets/avatar.jpg' [nickname]='item.nickname' [content]='item.content' [mood]='item.mood'
-        [tags]='item.tags'>
+    <li [@newLetter]="letters&&letters.indexOf(item)===0?state:null">
+      <luv-letter-card [loading]='loading' avatar='../../../assets/avatar.jpg' [nickname]='item.nickname' [content]='item.content'
+        [mood]='item.mood' [tags]='item.tags'>
       </luv-letter-card>
     </li>
   </ng-template>
   <ng-template #pagination>
-    <nz-pagination nzHideOnSinglePage="false" [nzPageIndex]="1" [(nzPageSize)]="size" [nzTotal]="size*max" nzSimple></nz-pagination>
+    <nz-pagination (nzPageIndexChange)="onPageChange($event)" nzHideOnSinglePage="false" [nzPageIndex]="1"
+      [(nzPageSize)]="size" [nzTotal]="size*max" nzSimple></nz-pagination>
   </ng-template>
 </nz-list>

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import {
   trigger,
   state,
@@ -31,48 +31,37 @@ import { tap, switchMap } from 'rxjs/operators';
 })
 export class LetterListComponent implements OnInit, OnDestroy {
 
-  public position = 1;
+  @Input()
   public size = 10;
+  @Input()
   public max = 10;
+  @Input()
   public letters: Luvletter[];
-  public state: string;
-  public subscriptionA: Subscription;
-  public subscriptionB: Subscription;
+  @Input()
+  public state: 'init' | 'done';
+  @Input()
+  public loading = true;
+
+  @Input()
+  public onPageChange: (e: number) => {};
+
+  public defaultLetter: Luvletter[] = [{
+    id: 0,
+    account: 'loading',
+    nickname: 'loading',
+    createTime: '0000-00-00 00:00:00',
+    content: 'loading',
+    mood: 'loading',
+    tags: ['loading'],
+  }];
 
   constructor(
-    private letter: LetterService,
   ) {
-    this.subscriptionA = letter.getLetters().subscribe(v => {
-      console.log(v);
-      this.letters = v;
-    });
-    this.subscriptionB = letter.getState().subscribe(v => {
-      console.log(v);
-      this.state = v;
-    });
-    letter.broadCastLetters(letter.letters);
-    letter.broadCastState('done');
   }
 
   ngOnInit() {
-    console.log('get');
-    this.letter
-      .getPagesLength().pipe(
-        tap(({ number, size }) => {
-          this.max = number;
-          this.size = size;
-          console.log(number, size);
-        }),
-        switchMap(({ size }) => this.letter.getOnePage(1, size))
-      )
-      .subscribe(v => {
-        // console.log(v);
-        this.letters = v;
-      });
   }
 
   ngOnDestroy() {
-    this.subscriptionA.unsubscribe();
-    this.subscriptionB.unsubscribe();
   }
 }
