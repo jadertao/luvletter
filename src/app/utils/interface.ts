@@ -2,7 +2,7 @@ export interface Luvletter {
   id?: number;
   account: string;
   nickname: string;
-  createTime: number;
+  createTime: string;
   content: string;
   mood: string;
   tags: Array<string>;
@@ -16,4 +16,10 @@ export interface Account {
 export interface CustomError {
   error: string;
   message: string;
+}
+
+export interface PartialLetter {
+  mood: string;
+  content: string;
+  tags: string[];
 }

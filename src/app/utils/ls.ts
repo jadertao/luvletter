@@ -1,3 +1,5 @@
+import dlv from 'dlv';
+import { Router } from '@angular/router';
 
 /**
  *
@@ -86,3 +88,16 @@ export function removeBatchItemFromLocalStorage(batch: string[]) {
 export function clearLocalStorage() {
   localStorage.setItem('luvletter', JSON.stringify({}));
 }
+
+export const getValueOfUserInfo = (router: Router) => (key: string): any => {
+  const userInfo = getItemFromLocalStorage('userInfo');
+  if (userInfo) {
+    const value = dlv(userInfo, key);
+    if (value) {
+      return value;
+    }
+  }
+  clearLocalStorage();
+  router.navigate(['/login']);
+  return null;
+};

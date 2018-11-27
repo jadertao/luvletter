@@ -19,11 +19,6 @@ const routes: Routes = [
     component: LetterBoardComponent,
     canActivate: [AuthGuardService],
     pathMatch: 'full',
-    children: [{
-      path: '',
-      component: LetterListComponent,
-      pathMatch: 'full',
-    }]
   },
   {
     path: 'passport',
@@ -38,7 +33,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {})
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
