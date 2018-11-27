@@ -1,21 +1,22 @@
 <nz-modal [(nzVisible)]="isVisible" nzTitle="Post a Letter" (nzOnCancel)="handleCancel()" (nzOnOk)="onOk()"
   [nzOkLoading]="isOkLoading">
   <div class="content">
-    <div>
+    <div class="content-item">
       <span class="tag-prefix">Mood：</span>
       <nz-tag class="tag" *ngFor="let mood of moods" nzMode="checkable" [nzChecked]="selectedMood === mood"
         (nzCheckedChange)="handleChangeMood($event, mood)">
         {{ mood }}
       </nz-tag>
     </div>
-    <div>
+    <div class="content-item">
       <span class="tag-prefix">Tag：</span>
       <nz-tag style="min-height:90px" class="tag" *ngFor="let tag of tags" nzMode="checkable" [nzChecked]="selectedTags.indexOf(tag) > -1"
         (nzCheckedChange)="handleChangeTags($event, tag)">
         {{ tag }}
       </nz-tag>
     </div>
-    <textarea #input nz-input placeholder="type down your sayings" [nzAutosize]="{ minRows: 3, maxRows: 8 }"></textarea>
+    <textarea class="content-item" #input nz-input placeholder="type down your sayings" [nzAutosize]="{ minRows: 3, maxRows: 8 }"></textarea>
+    <nz-alert *ngIf="error" class="content-item" nzType="error" [nzMessage]="error" nzShowIcon></nz-alert>
   </div>
 </nz-modal>
 <button (click)="showModal()" class="post-letter" nz-button nzType="primary" nzSize="large" nzShape="circle">

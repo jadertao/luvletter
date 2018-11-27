@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
-import { PartialLetter } from '../../utils/interface';
+import { PartialLetter, Luvletter } from '../../utils/interface';
 import { BehaviorSubject } from 'rxjs';
 
 
@@ -30,9 +30,13 @@ export class LetterPostComponent implements OnInit {
   moods: string[];
   @Input()
   tags: string[];
+  @Input()
+  error: string;
 
   @Input()
   handleOk: (l: PartialLetter, cb?: () => void) => void;
+  @Input()
+  onShowModal?: () => void;
 
   @Input()
   toggleVisible: () => void;
@@ -91,11 +95,13 @@ export class LetterPostComponent implements OnInit {
   }
 
   showModal(): void {
-    this.isVisible = true;
+    if (this.onShowModal) {
+      this.onShowModal();
+    }
+    this.toggleVisible();
   }
 
   onOk = (): void => {
-    this.isOkLoading = true;
     this.handleOk({ content: this.content, tags: this.selectedTags, mood: this.selectedMood }, this.trancate);
   }
 
