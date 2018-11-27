@@ -1,9 +1,9 @@
-<nz-list [nzBordered]="'false'" [nzLoading]="'false'" [nzDataSource]="loading?defaultLetter:letters" [nzItemLayout]="'vertical'"
+<nz-list [nzBordered]="'false'" [nzLoading]="'false'" [nzDataSource]="letters" [nzItemLayout]="'vertical'"
   [nzRenderItem]="item" [nzPagination]="pagination">
   <ng-template #item let-item>
     <li [@newLetter]="letters&&letters.indexOf(item)===0?state:null">
-      <luv-letter-card [loading]='loading' avatar='../../../assets/avatar.jpg' [nickname]='item.nickname' [content]='item.content'
-        [mood]='item.mood' [tags]='item.tags'>
+      <luv-letter-card [loading]='loading' [avatar]='makeUpAvatarURL(item.account)' [nickname]='item.nickname'
+        [content]='item.content' [mood]='item.mood' [tags]='item.tags'>
       </luv-letter-card>
     </li>
   </ng-template>

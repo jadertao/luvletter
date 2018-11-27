@@ -6,10 +6,9 @@ import {
   animate,
   transition
 } from '@angular/animations';
-import { LetterService } from '../../shared/service/letter.service';
 import { Luvletter } from '../../utils/interface';
-import { Subscription } from 'rxjs';
-import { tap, switchMap } from 'rxjs/operators';
+import { AVATAR } from '../../http/url';
+
 
 @Component({
   selector: 'luv-letter-list',
@@ -45,19 +44,11 @@ export class LetterListComponent implements OnInit, OnDestroy {
   @Input()
   public onPageChange: (e: number) => {};
 
-  public defaultLetter: Luvletter[] = [{
-    id: 0,
-    account: 'loading',
-    nickname: 'loading',
-    createTime: '0000-00-00 00:00:00',
-    content: 'loading',
-    mood: 'loading',
-    tags: ['loading'],
-  }];
-
   constructor(
   ) {
   }
+
+  makeUpAvatarURL = AVATAR;
 
   ngOnInit() {
   }
