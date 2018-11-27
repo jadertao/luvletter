@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Luvletter, PartialLetter } from '../utils/interface';
 import { LetterService } from '../shared/service/letter.service';
-import { tap, switchMap } from 'rxjs/operators';
+import { tap, concatMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { getValueOfUserInfo } from '../utils/ls';
 import { format } from 'date-fns';
+import { TagService } from '../shared/service/tag.service';
+import { MoodService } from '../shared/service/mood.service';
 
 @Component({
   selector: 'luv-letter-board',
@@ -13,6 +15,7 @@ import { format } from 'date-fns';
 })
 export class LetterBoardComponent implements OnInit {
 
+  public error: string;
 
   // list
   public position = 1;
@@ -30,7 +33,7 @@ export class LetterBoardComponent implements OnInit {
 
   public defaultLetter: Luvletter[] = [{
     id: 0,
-    account: 'loading',
+    account: 'default',
     nickname: 'loading',
     createTime: '0000-00-00 00:00:00',
     content: 'loading',
@@ -39,7 +42,9 @@ export class LetterBoardComponent implements OnInit {
   }];
   constructor(
     private router: Router,
-    private letter: LetterService
+    private letter: LetterService,
+    private tagService: TagService,
+    private moodService: MoodService,
   ) { }
 
   onPageChange = (e: number) => {
@@ -53,21 +58,42 @@ export class LetterBoardComponent implements OnInit {
   }
 
   toggleVisible = () => {
+    this.error = '';
     this.isVisible = !Boolean(this.isVisible);
   }
 
-  handleOk = (msg: PartialLetter, cb?: () => void): void => {
-    const { content, tags, mood } = msg;
-    this.isOkLoading = true;
+  checkPostable(v: PartialLetter): boolean {
+    const { mood, tags, content } = v;
+    if (!mood) {
+      this.error = 'mood 不能为空';
+      return false;
+    }
+    if (tags.length === 0) {
+      this.error = 'tags 不能为空';
+      return false;
+    }
+    if (content.trim().length === 0) {
+      this.error = '内容不能为空';
+      return false;
+    }
+    return true;
+  }
 
-    const getUserInfo = getValueOfUserInfo(this.router);
-    const account = getUserInfo('account');
-    const nickname = getUserInfo('nickname');
-    const createTime = format(new Date().toLocaleDateString(), 'YYYY-MM-DD hh:mm:ss');
-    const letter: Luvletter = { account, nickname, createTime, content, tags, mood };
-    setTimeout(() => {
+  handleOk = (msg: PartialLetter, cb?: () => void): void => {
+
+    if (this.checkPostable(msg)) {
+      this.error = '';
+      const { content, tags, mood } = msg;
+
+      this.isOkLoading = true;
+
+      const getUserInfo = getValueOfUserInfo(this.router);
+      const account = getUserInfo('account');
+      const nickname = getUserInfo('nickname');
+      const createTime = format(new Date().toLocaleDateString(), 'YYYY-MM-DD hh:mm:ss');
+      const letter: Luvletter = { account, nickname, createTime, content, tags, mood };
       this.post(letter, cb);
-    }, 2000);
+    }
   }
 
   handleCancel(): void {
@@ -77,7 +103,7 @@ export class LetterBoardComponent implements OnInit {
 
   post = (letter: Luvletter, cb?: () => void) => {
     this.letter.post(letter).pipe(
-      switchMap(() => this.letter.getOnePage(1))
+      concatMap(() => this.letter.getOnePage(1))
     ).subscribe(v => {
       this.letters = v;
       this.isVisible = false;
@@ -90,6 +116,14 @@ export class LetterBoardComponent implements OnInit {
     }, () => { console.log(222); this.isOkLoading = false; console.log(this.isOkLoading); });
   }
 
+  onShowModal = () => {
+    if (this.isVisible === false) {
+      console.log(this);
+      this.tagService.getAll().subscribe(v => console.log(v));
+      this.moodService.getAll().subscribe(v => console.log(v));
+    }
+  }
+
   ngOnInit() {
     this.letter
       .getPagesLength().pipe(
@@ -98,7 +132,7 @@ export class LetterBoardComponent implements OnInit {
           this.size = size;
           console.log(number, size);
         }),
-        switchMap(({ size }) => this.letter.getOnePage(1, size))
+        concatMap(({ size }) => this.letter.getOnePage(1, size))
       )
       .subscribe(v => {
         this.letters = v;

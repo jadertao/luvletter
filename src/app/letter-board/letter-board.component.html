@@ -1,4 +1,4 @@
 <luv-letter-list [size]="size" [max]="max" [letters]="letters||defaultLetter" [state]="state" [loading]="loading"
   [onPageChange]="onPageChange"></luv-letter-list>
-<luv-letter-post [handleOk]="handleOk" [toggleVisible]="toggleVisible" [(isVisible)]="isVisible" [isOkLoading]="isOkLoading"
-  [moods]="moods" [tags]="tags"></luv-letter-post>
+<luv-letter-post [onShowModal]="onShowModal" [error]="error" [handleOk]="handleOk" [toggleVisible]="toggleVisible"
+  [(isVisible)]="isVisible" [isOkLoading]="isOkLoading" [moods]="moods" [tags]="tags"></luv-letter-post>
