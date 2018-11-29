@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BlankComponent } from './blank/blank.component';
 
-import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   declarations: [
-    ScrollToTopComponent,
+    BlankComponent
   ],
   providers: [
   ],
   exports: [
-    ScrollToTopComponent,
+    BlankComponent
   ],
 })
-export class BasicModule { }
+export class ComponentModule { }

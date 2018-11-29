@@ -1,0 +1,10 @@
+@import "../../../config.scss";
+:host {
+  @include respond-to(sm) {
+    display: none;
+  }
+}
+
+span {
+  display: inline-block;
+}
