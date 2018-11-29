@@ -6,17 +6,25 @@
   box-sizing: border-box;
   @include respond-to(sm) {
     width: 90vw;
+    min-width: 50vw;
   }
 }
 
 .letter-cart-content {
   margin-top: 18px;
   margin-bottom: 10px;
+  white-space: pre-wrap;
 }
 
 .letter-cart-avatar {
   height: 42px;
   width: 42px;
+}
+
+.time {
+  font-size: 10px;
+  text-align: right;
+  opacity: 0.5;
 }
 
 nz-tag {

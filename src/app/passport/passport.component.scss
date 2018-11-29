@@ -1,3 +1,5 @@
+@import "../../config.scss";
+
 :host {
   display: flex;
   width: 100%;
@@ -33,13 +35,24 @@
     margin-right: 50px;
   }
   .right {
+    display: flex;
+    flex-direction: column;
     flex: 1;
     box-sizing: border-box;
     height: 600px;
-    // margin: 70px 70px 20px 140px;
+    padding: 70px 40px; // justify-content: center;
+    // align-items: center;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 1px 3px rgba(26, 26, 26, .1);
+    .info-item {
+      font-size: 20px;
+      @include respond-to(sm) {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
   }
   .avatar-container {
     padding: 8px;

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
@@ -17,6 +17,7 @@ import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { FooterComponent } from './footer/footer.component';
 import { httpInterceptorProviders } from './http/intercepter';
+import { ComponentModule } from './component/component.module';
 
 registerLocaleData(zh);
 
@@ -37,7 +38,8 @@ registerLocaleData(zh);
       LetterBoardModule,
       FormsModule,
       HttpClientModule,
-      NgZorroAntdModule
+      NgZorroAntdModule,
+      ComponentModule,
    ],
    providers: [
       httpInterceptorProviders
