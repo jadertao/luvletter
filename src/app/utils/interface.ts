@@ -23,3 +23,10 @@ export interface PartialLetter {
   content: string;
   tags: string[];
 }
+
+export interface AccountInfo {
+  account: string;
+  nickname: string;
+  avatar: string;
+  token: string;
+}
