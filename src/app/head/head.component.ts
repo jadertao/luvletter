@@ -22,7 +22,6 @@ export class HeadComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    console.log(this.auth.user);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

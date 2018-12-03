@@ -33,7 +33,6 @@ export class LetterService {
     return this.http.get<any>(LENGTH_OF_PAGES).pipe(
       catchError(handleError(this.messager))
     );
-    // this.http.get<any>(ALL_LETTERS).subscribe(v => console.log(v));
   }
   getOnePage(pageIndex: number, pageSize: number = this.pageSize) {
     return this.http.get<any>(ALL_LETTERS, { params: page2Offset(pageIndex, pageSize) }).pipe(
