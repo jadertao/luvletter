@@ -23,7 +23,6 @@ export class AuthGuardService {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const url: string = state.url;
     const isLogin = checkLogin();
-    console.log(isLogin, url);
     if (isLogin) {
       if (url === '/login') {
         this.router.navigate(['/board']);

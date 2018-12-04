@@ -17,7 +17,7 @@ registerLocaleData(zh);
     RouterModule,
     ReactiveFormsModule,
     NgZorroAntdModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   declarations: [
     LetterBoardComponent,

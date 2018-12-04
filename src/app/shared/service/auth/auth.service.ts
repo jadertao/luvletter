@@ -33,7 +33,6 @@ export class AuthService {
     return this.http.post<HttpResponse<any> | any>(LOGIN, body).pipe(
       catchError(handleError(this.messager, { closeOthers: true })),
       tap(v => {
-        console.log(v);
         if (!v.error) {
           this.messager.remove(loginMsg.messageId);
           this.messager.success('登陆成功', { nzDuration: 1000 });
