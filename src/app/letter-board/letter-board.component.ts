@@ -28,8 +28,8 @@ export class LetterBoardComponent implements OnInit {
   // post
   public isOkLoading = false;
   public isVisible = false;
-  public moods = ['moodA', 'moodB', 'moodC', 'moodD', 'moodE'];
-  public tags = ['tagA', 'tagB', 'tagC', 'tagD', 'tagE'];
+  public moods = [];
+  public tags = [];
 
   public defaultLetter: Luvletter[] = [{
     id: 0,
@@ -113,14 +113,13 @@ export class LetterBoardComponent implements OnInit {
       }
       this.state = 'init';
       setTimeout(() => { this.state = 'done'; }, 0);
-    }, () => { console.log(222); this.isOkLoading = false; console.log(this.isOkLoading); });
+    }, () => { this.isOkLoading = false; });
   }
 
   onShowModal = () => {
     if (this.isVisible === false) {
-      console.log(this);
-      this.tagService.getAll().subscribe(v => console.log(v));
-      this.moodService.getAll().subscribe(v => console.log(v));
+      this.tagService.getAll().subscribe(v => this.tags = v);
+      this.moodService.getAll().subscribe(v => this.moods = v);
     }
   }
 
@@ -130,7 +129,6 @@ export class LetterBoardComponent implements OnInit {
         tap(({ number, size }) => {
           this.max = number;
           this.size = size;
-          console.log(number, size);
         }),
         concatMap(({ size }) => this.letter.getOnePage(1, size))
       )
