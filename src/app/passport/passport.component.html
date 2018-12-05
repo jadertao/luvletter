@@ -4,11 +4,28 @@
     <div class="left">
       <div class="info">
         <div class="avatar-container">
-          <img class="avatar" src="../../../assets/avatar.jpg">
+          <img class="avatar" [src]="makeUpAvatar(cacheUserAccountInfo().account)">
         </div>
-        <p>王婧</p>
+        <p>{{cacheUserAccountInfo().nickname}}</p>
       </div>
     </div>
-    <div class="right"></div>
+    <div class="right">
+      <span class="info-item">
+        <luv-blank [width]="30"></luv-blank>
+        <span>账号</span>
+        <luv-blank [width]="100"></luv-blank>
+        <span>{{cacheUserAccountInfo().account}}</span>
+        <luv-blank [width]="50"></luv-blank>
+      </span>
+      <nz-divider></nz-divider>
+      <span class="info-item">
+        <luv-blank [width]="30"></luv-blank>
+        <span>昵称</span>
+        <luv-blank [width]="100"></luv-blank>
+        <span>{{cacheUserAccountInfo().nickname}}</span>
+        <luv-blank [width]="50"></luv-blank>
+      </span>
+      <nz-divider></nz-divider>
+    </div>
   </div>
 </div>

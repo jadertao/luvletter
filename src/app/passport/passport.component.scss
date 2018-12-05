@@ -1,5 +1,4 @@
 @import "../../config.scss";
-
 :host {
   display: flex;
   width: 100%;
@@ -22,6 +21,12 @@
     position: relative;
     top: -80px;
     padding: 0 70px;
+    @include respond-to(sm) {
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0;
+    }
   }
   .info {
     p {
@@ -33,6 +38,10 @@
   .left {
     height: 150px;
     margin-right: 50px;
+    @include respond-to(sm) {
+      margin-right: 0;
+      margin-bottom: 40px;
+    }
   }
   .right {
     display: flex;
@@ -45,6 +54,9 @@
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 1px 3px rgba(26, 26, 26, .1);
+    @include respond-to(sm) {
+      width: 100%;
+    }
     .info-item {
       font-size: 20px;
       @include respond-to(sm) {
