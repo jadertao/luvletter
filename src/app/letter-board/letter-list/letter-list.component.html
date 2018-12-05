@@ -2,7 +2,7 @@
   [nzRenderItem]="item" [nzPagination]="pagination">
   <ng-template #item let-item>
     <li [@newLetter]="letters&&letters.indexOf(item)===0?state:null">
-      <luv-letter-card [loading]='loading' [avatar]='makeUpAvatarURL(item.account)' [nickname]='item.nickname'
+      <luv-letter-card [time]="item.createTime" [loading]='loading' [avatar]='makeUpAvatarURL(item.account)' [nickname]='item.nickname'
         [content]='item.content' [mood]='item.mood' [tags]='item.tags'>
       </luv-letter-card>
     </li>

@@ -89,9 +89,12 @@ export function clearLocalStorage() {
   localStorage.setItem('luvletter', JSON.stringify({}));
 }
 
-export const getValueOfUserInfo = (router: Router) => (key: string): any => {
+export const getValueOfUserInfo = (router: Router) => (key?: string): any => {
   const userInfo = getItemFromLocalStorage('userInfo');
   if (userInfo) {
+    if (!key) {
+      return userInfo;
+    }
     const value = dlv(userInfo, key);
     if (value) {
       return value;
