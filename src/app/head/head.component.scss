@@ -1,6 +1,7 @@
 @import "../../config.scss";
 :host {
   z-index: 1;
+  user-select: none;
 }
 
 .inside-header {
