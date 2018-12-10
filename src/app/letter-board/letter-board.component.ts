@@ -51,6 +51,7 @@ export class LetterBoardComponent implements OnInit {
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
     this.loading = true;
+    this.position = e;
     this.letter.getOnePage(e, this.size).subscribe(v => {
       this.letters = v;
       this.loading = false;
@@ -103,7 +104,13 @@ export class LetterBoardComponent implements OnInit {
 
   post = (letter: Luvletter, cb?: () => void) => {
     this.letter.post(letter).pipe(
-      concatMap(() => this.letter.getOnePage(1))
+      concatMap(() => this.letter.getPagesLength())
+    ).pipe(
+      tap(({ number, size }) => {
+        this.max = number;
+        this.size = size;
+      }),
+      concatMap(({ size }) => this.letter.getOnePage(this.position, size))
     ).subscribe(v => {
       this.letters = v;
       this.isVisible = false;
@@ -111,8 +118,10 @@ export class LetterBoardComponent implements OnInit {
       if (typeof cb === 'function') {
         cb();
       }
-      this.state = 'init';
-      setTimeout(() => { this.state = 'done'; }, 0);
+      if (this.position === 1) {
+        this.state = 'init';
+        setTimeout(() => { this.state = 'done'; }, 0);
+      }
     }, () => { this.isOkLoading = false; });
   }
 
